@@ -1,15 +1,16 @@
 import React from "react";
-import { Dashboard, Login, PrivateRoute, AuthWrapper, Error } from "./pages";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
-// Domain: kishore007k.us.auth0.com
-// ClientID: Pdnd6EjfrI0X7Lza48CPpFq40yaJCjpP
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
+import { GitHubProvider } from "./context/context";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 ReactDOM.render(
 	<React.StrictMode>
 		<Auth0Provider
-			domain="kishore007k.us.auth0.com"
-			clientId="Pdnd6EjfrI0X7Lza48CPpFq40yaJCjpP"
+			domain="dev-pu8wyk-g.us.auth0.com"
+			clientId="GYsVn60CkUU6fa4yiwpRrT1KVL5KuzPh"
 			redirectUri={window.location.origin}
 			cacheLocation="localstorage"
 		>
@@ -21,4 +22,7 @@ ReactDOM.render(
 	document.getElementById("root")
 );
 
-export default App;
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
