@@ -12,7 +12,7 @@ import FusionCharts from "fusioncharts";
 import Chart from "fusioncharts/fusioncharts.charts";
 
 // Include the theme as fusion
-import FusionTheme from "fusioncharts/themes/fusioncharts.theme.zune";
+import FusionTheme from "fusioncharts/themes/fusioncharts.theme.candy";
 
 // Adding the chart and theme as dependency to the core fusioncharts
 ReactFC.fcRoot(FusionCharts, Chart, FusionTheme);
@@ -30,6 +30,7 @@ const ChartComponent = ({ data }) => {
 				decimals: 0,
 				doughnutRadius: "50%",
 				showPercentValues: 0,
+				theme: "candy",
 			},
 			// Chart Data
 			data: data,

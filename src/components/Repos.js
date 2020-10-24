@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { GitHubContext } from "../context/context";
-import { ExampleChart, Pie3D, Column3D, Bar3D, Doughnut2D } from "./Charts";
+import { Pie3D, Column3D, Bar3D, Doughnut2D } from "./Charts";
 
 const Wrapper = styled.div`
 	display: grid;
@@ -49,6 +49,7 @@ const Repos = () => {
 		})
 		.slice(0, 5); // This allows a maximum of 5 top languages of the user to display
 
+	// Stars per Language
 	const mostPopular = Object.values(languages)
 		.sort((a, b) => {
 			return b.stars - a.stars;
@@ -58,13 +59,30 @@ const Repos = () => {
 		})
 		.slice(0, 5);
 
+	// Stars and Forks
+	let { stars, forks } = repos.reduce(
+		(total, item) => {
+			const { stargazers_count, name, forks } = item;
+			total.stars[stargazers_count] = { label: name, value: stargazers_count };
+			total.forks[forks] = { label: name, value: forks };
+			return total;
+		},
+		{
+			stars: {},
+			forks: {},
+		}
+	);
+
+	stars = Object.values(stars).slice(-5).reverse();
+	forks = Object.values(forks).slice(-5).reverse();
+
 	return (
 		<section className="section">
 			<Wrapper className="section-center">
 				<Pie3D data={mostUsed} />
-				<Column3D data={mostPopular} />
+				<Column3D data={stars} />
 				<Doughnut2D data={mostPopular} />
-				<Bar3D data={mostPopular} />
+				<Bar3D data={forks} />
 			</Wrapper>
 		</section>
 	);
