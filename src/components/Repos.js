@@ -29,25 +29,42 @@ const Wrapper = styled.div`
 
 const Repos = () => {
 	const { repos } = React.useContext(GitHubContext);
-	const chartData = [
-		{
-			label: "HTML",
-			value: "15",
-		},
-		{
-			label: "CSS",
-			value: "20",
-		},
-		{
-			label: "JavaScript",
-			value: "40",
-		},
-	];
+	const languages = repos.reduce((total, item) => {
+		const { language, stargazers_count } = item;
+		if (!language) return total;
+		if (!total[language]) {
+			total[language] = { label: language, value: 1, stars: stargazers_count };
+		} else {
+			total[language] = {
+				...total[language],
+				value: total[language].value + 1,
+				stars: total[language].stars + stargazers_count,
+			};
+		}
+		return total;
+	}, {});
+	const mostUsed = Object.values(languages)
+		.sort((a, b) => {
+			return b.value - a.value;
+		})
+		.slice(0, 5); // This allows a maximum of 5 top languages of the user to display
+
+	const mostPopular = Object.values(languages)
+		.sort((a, b) => {
+			return b.stars - a.stars;
+		})
+		.map((item) => {
+			return { ...item, value: item.stars };
+		})
+		.slice(0, 5);
+
 	return (
 		<section className="section">
 			<Wrapper className="section-center">
-				<Pie3D data={chartData} />
-				{/* <ExampleChart data={chartData} /> */}
+				<Pie3D data={mostUsed} />
+				<Column3D data={mostPopular} />
+				<Doughnut2D data={mostPopular} />
+				<Bar3D data={mostPopular} />
 			</Wrapper>
 		</section>
 	);
