@@ -1,4 +1,4 @@
-<img alt="Instagram" width="100%" text-align="center" src="https://user-images.githubusercontent.com/34863222/97098905-5289a000-16a8-11eb-84f9-0796e21f9a37.gif" />
+<img alt="Instagram" width="100%" text-align="center" src="https://user-images.githubusercontent.com/34863222/97098994-6bdf1c00-16a9-11eb-8770-9a9935d87929.gif" />
 
 # Features Covered:-
 
